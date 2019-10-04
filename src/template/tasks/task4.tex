@@ -1,0 +1,60 @@
+% !TEX root= ../hw1.tex
+
+\section{Задача 4}
+Посчитайте число графов множество вершин которых совпадает с множеством $\{1,2,\ldots,12\}$ и которые изоморфны графу на рисунке $1$.
+
+\begin{figure}[H]
+\[\begin{tikzpicture}
+\node (p1) at (0,0) [scale=0.3,shape=circle,draw=black,fill=white] {};
+\node (p2) at (1,0) [scale=0.3,shape=circle,draw=black,fill=white] {};
+\node (p3) at (1.5,0.809) [scale=0.3,shape=circle,draw=black,fill=white] {};
+\node (p4) at (1,1.608) [scale=0.3,shape=circle,draw=black,fill=white] {};
+\node (p5) at (0,1.618) [scale=0.3,shape=circle,draw=black,fill=white] {};
+\node (p6) at (-0.5,0.809) [scale=0.3,shape=circle,draw=black,fill=white] {};
+\node (p7) at (2,1.618) [scale=0.3,shape=circle,draw=black,fill=white] {};
+\node (p8) at (3,1.618) [scale=0.3,shape=circle,draw=black,fill=white] {};
+\node (p9) at (-1,1.618) [scale=0.3,shape=circle,draw=black,fill=white] {};
+\node (p10) at (-2,1.618) [scale=0.3,shape=circle,draw=black,fill=white] {};
+\node (p11) at (2,0) [scale=0.3,shape=circle,draw=black,fill=white] {};
+\node (p12) at (-1,0) [scale=0.3,shape=circle,draw=black,fill=white] {};
+
+\draw (p1) -- (p2) -- (p3) -- (p4) -- (p5) -- (p6) -- (p1);
+\draw (p4) -- (p7) -- (p8);
+\draw (p5) -- (p9) -- (p10);
+\draw (p1) -- (p11);
+\draw (p2) -- (p12);
+\draw (p2) -- (p5);
+\draw (0.5,-1.0) node {\tiny{Рис. 1.}};
+
+\end{tikzpicture}\]
+\end{figure}
+
+\textbf{Решение:}
+
+Пронумеруем вершины исходного графа:
+
+\begin{figure}[H]
+\[\begin{tikzpicture}
+      \node (p10) at (-2,1.618) [scale=0.3,shape=circle,draw=black,fill=white,label=below:$V_1$] {};
+      \node (p9) at (-1,1.618) [scale=0.3,shape=circle,draw=black,fill=white,label=below:$V_2$] {};
+      \node (p5) at (0,1.618) [scale=0.3,shape=circle,draw=black,fill=white,label=below:$V_3$] {};
+      \node (p4) at (1,1.608) [scale=0.3,shape=circle,draw=black,fill=white,label=below:$V_4$] {};
+      \node (p7) at (2,1.618) [scale=0.3,shape=circle,draw=black,fill=white,label=below:$V_5$] {};
+      \node (p8) at (3,1.618) [scale=0.3,shape=circle,draw=black,fill=white,label=below:$V_6$] {};
+      \node (p6) at (-0.5,0.809) [scale=0.3,shape=circle,draw=black,fill=white,label=below:$V_7$] {};
+      \node (p3) at (1.5,0.809) [scale=0.3,shape=circle,draw=black,fill=white,label=below:$V_8$] {};
+      \node (p12) at (-1,0) [scale=0.3,shape=circle,draw=black,fill=white,label=below:$V_9$] {};
+      \node (p1) at (0,0) [scale=0.3,shape=circle,draw=black,fill=white,label=below:$V_{10}$] {};
+      \node (p2) at (1,0) [scale=0.3,shape=circle,draw=black,fill=white,label=below:$V_{11}$] {};
+      \node (p11) at (2,0) [scale=0.3,shape=circle,draw=black,fill=white,label=below:$V_{12}$] {};
+
+\draw (p1) -- (p2) -- (p3) -- (p4) -- (p5) -- (p6) -- (p1);
+\draw (p4) -- (p7) -- (p8);
+\draw (p5) -- (p9) -- (p10);
+\draw (p1) -- (p11);
+\draw (p2) -- (p12);
+\draw (p2) -- (p5);
+\draw (0.5,-1.0) node {\tiny{Рис. 2.}};
+
+\end{tikzpicture}\]
+\end{figure}

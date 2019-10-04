@@ -1,0 +1,62 @@
+%! Author = eandreyf
+%! Date = 2019-09-25
+
+% Preamble
+\documentclass[a4paper, 11pt]{article}
+
+% Packages
+%%% Работа с русским языком
+\usepackage{cmap}					% поиск в PDF
+\usepackage{mathtext} 				% русские буквы в формулах
+\usepackage[T2A]{fontenc}			% кодировка
+\usepackage[utf8]{inputenc}			% кодировка исходного текста
+\usepackage[english,russian]{babel}	% локализация и переносы
+%%% Дополнительная работа с математикой
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
+\usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+
+% Рисование графов
+\usepackage{tikz}
+\usepackage{float}
+
+%% Номера формул
+% \mathtoolsset{showonlyrefs=true} % Показывать номера только у тех формул, на которые есть \eqref{} в тексте.
+\newcommand{\myeq}[1]{\stackrel{\mathclap{\mbox{[#1]}}}{=}}
+
+\author{Andrey Evstropov}
+\title{
+	Домашняя работа 1 \\
+	\large ШАД. Теория вероятности
+}
+\date{2019 г.}
+
+\usepackage{hyperref}
+\hypersetup{				% Гиперссылки
+    unicode=true,           % русские буквы в раздела PDF
+    pdftitle={Заголовок},   % Заголовок
+    pdfauthor={Автор},      % Автор
+    pdfsubject={Тема},      % Тема
+    pdfcreator={Создатель}, % Создатель
+    pdfproducer={Производитель}, % Производитель
+    pdfkeywords={keyword1} {key2} {key3}, % Ключевые слова
+    colorlinks=true,       	% false: ссылки в рамках; true: цветные ссылки
+    linkcolor=red,          % внутренние ссылки
+    citecolor=black,        % на библиографию
+    filecolor=magenta,      % на файлы
+    urlcolor=cyan           % на URL
+}
+
+% Собирать только указанный файл. Чтобы собрать всё, нужно закомментировать следующую строку
+\includeonly{tasks/task1}
+
+% Document
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+% Подключаем каждое решение в отдельном файле
+\include{tasks/task1}
+
+\end{document}

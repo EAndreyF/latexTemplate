@@ -1,0 +1,359 @@
+%! Author = eandreyf
+%! Date = 2019-09-25
+
+% Preamble
+\documentclass[a4paper, 11pt]{article}
+
+% Packages
+%%% Работа с русским языком
+\usepackage{cmap}					% поиск в PDF
+\usepackage{mathtext} 				% русские буквы в формулах
+\usepackage[T2A]{fontenc}			% кодировка
+\usepackage[utf8]{inputenc}			% кодировка исходного текста
+\usepackage[english,russian]{babel}	% локализация и переносы
+%%% Дополнительная работа с математикой
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
+\usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+
+%% Номера формул
+% \mathtoolsset{showonlyrefs=true} % Показывать номера только у тех формул, на которые есть \eqref{} в тексте.
+\newcommand{\myeq}[1]{\stackrel{\mathclap{\mbox{[#1]}}}{=}}
+
+\author{Andrey Evstropov}
+\title{
+	Разбор семинарских задач \\
+	\large ШАД. Теория вероятности
+}
+\date{2019 г.}
+
+% Document
+\begin{document}
+
+\maketitle
+
+\section{Листок 1. Асимптотики}
+
+\subsection{Задача 1}
+
+Найти асимптотику для $\binom{n}{3n}$, при $n \rightarrow \infty$
+
+\textbf{Решение:}
+\[
+\binom{n}{3n}=\frac{(3n)!}{n!(2n)!}
+\]
+
+т.к. $n \to \infty$, то факториалы можем расписать по формуле Стирлинга
+
+\begin{equation*}
+\begin{aligned}
+\frac{(3n)!}{n!(2n)!}&\sim \frac{
+	\sqrt{2\pi3n}{\left(\frac{3n}{e}\right)^{3n}}
+}{
+	\sqrt{2\pi n}{\left(\frac{n}{e}\right)^{n}}
+	\sqrt{2\pi 2n}{\left(\frac{2n}{e}\right)^{2n}}
+}=
+\\
+&= \sqrt{\frac{3}{4\pi n}} \cdot \frac{
+	3^{3n}n^{3n}
+}{
+	n^n 2^{2n}n^{2n}
+}  = \frac{
+	3^{3n}
+}{
+	\sqrt{n}2^{2n}
+} =
+\\
+& = \sqrt{\frac{3}{4\pi n}} \cdot \left(\frac{27}{4}\right)^n
+\end{aligned}
+\end{equation*}
+
+\textbf{Ответ:}
+\[
+\binom{n}{3n}\sim \sqrt{\frac{3}{4\pi n}} \cdot \left(\frac{27}{4}\right)^n
+\]
+
+
+\section{Листок 2. Асимптотики и подсчет графов}
+
+\subsection{Задача 1}
+Подберите функции $f(x)$ и $g(x)$ такие, что $f(x)\sim g(x)$, 
+но $e^{f(x)} \neq O(e^{g(x)})$.
+
+\textbf{Ответ:}
+\begin{equation*}
+\begin{aligned}
+f(x)&=x + 1+\frac{1}{x} \\
+g(x)&=x
+\end{aligned}
+\end{equation*}
+
+Тогда:
+
+\begin{equation*}
+\lim_{x \to \infty}\frac{f(x)}{g(x)}=\lim_{x \to \infty}\left(1+\frac{1}{x}+\frac{1}{x^2}\right)=1
+\end{equation*}
+
+Но:
+
+\begin{equation*}
+\lim_{x \to \infty}\frac{e^{f(x)}}{e^{g(x)}}=
+	\lim_{x \to \infty}\frac{e^{x +1+\frac{1}{x}}}{e^x}=
+	\lim_{x \to \infty}e^{1+\frac{1}{x}}=e\neq 1
+\end{equation*}
+
+
+\subsection{Задача 2}
+Найдите асимптотику следующих величин при $n \to \infty$
+
+\indent а) $\frac{(6n)!}{(2n)!(4n-k)!k!}$ при фиксированном $k \in \mathbb{N}$, 
+\\
+
+\indent б) $\binom{2n^4}{n^6}$,
+\\
+
+\indent в) $\binom{[n/2]}{n}$ (итоговый ответ не должен содержать знака целой части, нужно рассмотреть отдельный случай четного и нечетного n).
+
+\textbf{Решение:}
+
+а) 
+
+т.к. $n \to \infty$, то факториалы можем расписать по формуле Стирлинга
+
+т.к. $k^2 = \bar{o}(n)$, то $\binom{k}{n} \sim \frac{n^k}{k!}$
+
+\begin{equation*}
+\begin{aligned}
+\frac{(6n)!}{(2n)!(4n-k)!k!}&=
+\frac{(6n)!}{(2n)!(4n)!}\binom{k}{4n}&\sim
+\\
+\sim 
+\frac
+{
+	\sqrt{2\pi 6n}{\left(\frac{6n}{e}\right)^{6n}}
+}{
+	\sqrt{2\pi 2n}{\left(\frac{2n}{e}\right)^{2n}}
+	\sqrt{2\pi 4n}{\left(\frac{4n}{e}\right)^{4n}}
+}\cdot \frac{(4n)^k}{k!}
+&=
+ \sqrt{\frac{3}{8\pi n}} \cdot \frac{
+	2^{6n}3^{6n}
+}{
+2^{10n}
+}\cdot \frac{(4n)^k}{k!} 
+&=
+\\
+= 
+\sqrt{\frac{3}{8\pi n}} \cdot \frac{
+	3^{6n}
+}{
+	2^{4n}
+}\cdot \frac{(4n)^k}{k!} 
+&=
+ \sqrt{\frac{3}{8\pi n}} \cdot \left(\frac{729}{16}\right)^n\cdot \frac{(4n)^k}{k!}
+\end{aligned}
+\end{equation*}
+
+б)
+
+Докажем следующее утверждение:
+\begin{equation} \label{eq:n4n3}
+\begin{aligned}
+\binom{k}{n} \sim \frac{n^k}{k!} \cdot e^{-\frac{k(k-1)}{2n} -\frac{(k-1)k(2k-1)}{12n^2}} + O\left(\frac{k^4}{n^3}\right)
+\end{aligned}
+\end{equation}
+
+Действительно:
+
+\begin{equation*}
+\begin{aligned}
+\binom{k}{n} &= \frac{n!}{(n-k)!k!} = \frac{n(n-1)\dots (n-k+1)}{k!} 
+\myeq{1} 
+	 \frac{n^k}{k!} 
+	\left(1-\frac{1}{n}\right)
+	\left(1-\frac{2}{n}\right) \cdot \dotsc \cdot
+	\left(1-\frac{n - k + 1}{n}\right)
+\myeq{2}
+\\
+&\myeq{2}
+	\frac{n^k}{k!} 
+	e^{
+		ln\left(1-\frac{1}{n}\right) +
+		ln\left(1-\frac{2}{n}\right) + \dotsc +
+		ln\left(1-\frac{n - k + 1}{n}\right)
+	}
+\myeq{3}
+\\
+&\myeq{3}
+	\frac{n^k}{k!} 
+	e^{
+		-\frac{1}{n}-\frac{1}{2n^2}+O\left(\frac{1}{n^3}\right)
+		-\frac{2}{n}-\frac{4}{2n^2}+O\left(\frac{8}{n^3}\right) + \dotsc
+		-\frac{k-1}{n}-\frac{(k-1)^2}{2n^2}+O\left(\frac{(k-1)^3}{n^3}\right)
+	}
+\myeq{4}
+\\
+&\myeq{4}
+\frac{n^k}{k!} 
+e^{
+	-\frac{1}{n}\left(1+2+ \dotsc + (k-1)\right)
+	-\frac{1}{2n^2}\left(1^2+2^2+ \dotsc + (k-1)^2\right)
+	+O\left(\frac{1^3 + 2^3 + \dotsc + (k-1)^3}{n^3}\right)
+}
+\myeq{5}
+\\
+&\myeq{5}
+\frac{n^k}{k!} 
+e^{
+	-\frac{k(k-1)}{2n}-\frac{k(k-1)(2k-1)}{12n^2}+O\left(\frac{k^4}{n^3}\right)
+}
+\end{aligned}
+\end{equation*}
+
+\indent [1] Из каждой скобки выносим $n$
+
+\indent [2] Каждую скобку представляем как экспоненту логарифма от этой скобки. Тогда в показателе экспоненты логарифмы суммируются
+
+\indent [3] Расскладываем каждый из логарифмов по формуле Тейлора
+
+\indent [4] Вынесем $\frac{1}{n}$ и $\frac{1}{2n^2}$
+
+\indent [5] Посчитаем сумму прогрессий. Для $O$ нам важен порядок
+
+Таким образом утверждение \eqref{eq:n4n3} доказано.
+
+Рассмотрим наше изначальное сочетание: $\binom{2n^4}{n^6} = \binom{k}{m}$.
+
+Заметим, что для него выполняется условие $k^4 = \bar{o}\left(m^3\right)$
+
+Значит:
+
+\begin{equation*}
+\begin{aligned}
+\binom{2n^4}{n^6} \sim 
+	\frac{\left(n^6\right)^{2n^4}}{(2n^4)!} 
+	e^{
+		-\frac{2n^4\left(2n^4 -1\right)}{2n^6}
+		-\frac{2n^4\left(2n^4 -1\right)\left(4n^4 - 1\right)}{12n^{12}}
+	}
+\end{aligned}
+\end{equation*}
+
+Посчитаем отдельно экспоненту и дробь. Факториал распишем по формуле стирлинга
+\begin{equation}
+\begin{aligned}
+-\frac{2n^4\left(2n^4 -1\right)}{2n^6}
+-\frac{2n^4\left(2n^4 -1\right)\left(4n^4 -1\right)}{12n^{12}}
+=
+\\
+=
+\frac{-2n^4\left(2n^4 -1\right)6n^6 - 2n^4\left(2n^4 -1\right)\left(4n^4 -1\right)}{12n^{12}}
+=
+\\
+=
+\frac{-12n^{10}+6n^6-8n^8+6n^4-1}{6n^8}
+\end{aligned}
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+\frac{\left(n^6\right)^{2n^4}}{(2n^4)!} \sim
+\frac{n^{12n^4}}{\sqrt{2\pi 2n^4} \left(\frac{2n^4}{e}\right)^{2n^4}} =
+\frac{n^{12n^4}e^{2n^4}}{2n^2\sqrt{\pi} (2n)^{8n^4}} = 
+\frac{n^{4n^4-2}e^{2n^4}}{2\sqrt{\pi} 2^{8n^4}}
+\end{aligned}
+\end{equation}
+
+В результате получим
+
+\begin{equation}
+\begin{aligned}
+    \frac{n^{4n^4-2}e^{2n^4}}{2\sqrt{\pi} 2^{8n^4}}
+    e^{
+        \frac{-12n^{10}+6n^6-8n^8+6n^4-1}{6n^8}
+    }
+\sim
+    \frac{n^{4n^4-2}}{2\sqrt{\pi} 2^{8n^4}}
+    e^{
+        -2n^4 + 2n^2 -\frac{4}{3}
+    }
+\end{aligned}
+\end{equation}
+
+в)
+
+т.к. $n \to \infty$, то факториалы можем расписать по формуле Стирлинга
+
+\begin{equation*}
+\begin{aligned}
+\binom{[n/2]}{n} = \frac{n!}{[n/2]!(n-[n/2])!} = 
+\frac{
+	\sqrt{2\pi n}\left(\frac{n}{e}\right)^n
+}{
+ \sqrt{2\pi [n/2]}
+ \left(
+ \frac{[n/2]}{e}
+ \right)
+ ^{[n/2]}
+ \sqrt{2\pi (n-[n/2])}
+ \left(
+ \frac{(n-[n/2])}{e}
+ \right)
+ ^{(n-[n/2])}
+}
+=
+\\
+=
+\frac{
+	\sqrt{n}n^n
+}{
+	\sqrt{2\pi [n/2](n-[n/2])} [n/2]^{[n/2]}(n-[n/2])^{n-[n/2])}
+}
+\end{aligned}
+\end{equation*}
+
+Посчитаем данную асимптотику для четных и нечетных $n$
+
+1) n - чётное, тогда можно убрать знак целой части и сокритить дроби 
+\[
+\frac{\sqrt{n}n^n}{[n/2]\sqrt{2\pi} [n/2]^n} = \frac{2^n\sqrt{2}}{\sqrt{n\pi}}
+\]
+
+2) n - нечётное, тогда $[n/2] = \frac{n-1}{2}$
+\begin{equation*}
+\begin{aligned}
+\frac{\sqrt{n}n^n}{
+	\sqrt{2\pi\frac{n-1}{2}\frac{n+1}{2}}
+	\left(\frac{n-1}{2}\right)^{\frac{n-1}{2}}
+	\left(\frac{n+1}{2}\right)^{\frac{n+1}{2}}
+}
+ = 
+\frac{\sqrt{n}(2n)^n}{
+ 	\sqrt{2\pi(n^2-1)}
+ 	(n-1)^{\frac{n-1}{2}}
+ 	(n+1)^{\frac{n+1}{2}}
+}
+\end{aligned}
+\end{equation*}
+
+\textbf{Ответ:}
+
+а) $\frac{\left(\frac{729}{16}\right)^n}{\sqrt{n}}$
+
+б) $\frac{n^{4n^4-2}}{2\sqrt{\pi} 2^{8n^4}}e^{    2n^4 + 2n^2 -\frac{4}{3} }$
+
+в)
+
+\begin{equation*}
+\binom{[n/2]}{n} = 
+\begin{cases}
+	n \text{ - чётно}, & \frac{2^n\sqrt{2}}{\sqrt{n\pi}} \\
+	n \text{ - нечётно}, &
+	\frac{\sqrt{n}(2n)^n}{
+		\sqrt{2\pi(n^2-1)}
+		(n-1)^{\frac{n-1}{2}}
+		(n+1)^{\frac{n+1}{2}}
+	}
+\end{cases}
+\end{equation*}
+
+\end{document}
